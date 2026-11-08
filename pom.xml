@@ -17,7 +17,7 @@
     <description>Coach: LLM calls, user context, recommendation generation</description>
 
     <properties>
-        <lifeos-base.version>0.1.1</lifeos-base.version>
+        <lifeos-base.version>0.2.0</lifeos-base.version>
         <lifeos-contracts.version>0.1.0</lifeos-contracts.version>
     </properties>
 
@@ -67,9 +67,16 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- JWT resource server, @CurrentUser, problem responses, correlation filter -->
         <dependency>
             <groupId>com.lifeos</groupId>
-            <artifactId>lifeos-base</artifactId>
+            <artifactId>lifeos-base-web</artifactId>
+            <version>${lifeos-base.version}</version>
+        </dependency>
+        <!-- Outbox, relay and inbox (creates its own tables) -->
+        <dependency>
+            <groupId>com.lifeos</groupId>
+            <artifactId>lifeos-base-messaging</artifactId>
             <version>${lifeos-base.version}</version>
         </dependency>
         <dependency>
