@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.lifeos</groupId>
         <artifactId>lifeos-root-pom</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
         <relativePath/>
     </parent>
 
@@ -17,9 +17,21 @@
     <description>Coach: LLM calls, user context, recommendation generation</description>
 
     <properties>
-        <lifeos-base.version>0.1.0-SNAPSHOT</lifeos-base.version>
-        <lifeos-contracts.version>0.1.0-SNAPSHOT</lifeos-contracts.version>
+        <lifeos-base.version>0.1.1</lifeos-base.version>
+        <lifeos-contracts.version>0.1.0</lifeos-contracts.version>
     </properties>
+
+    <!-- Used to resolve the parent POM, lifeos-base and lifeos-contracts when they are not in the local ~/.m2 (e.g. in CI).
+         Credentials come from the server with id "github" in settings.xml. -->
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/lifeos-io/*</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
