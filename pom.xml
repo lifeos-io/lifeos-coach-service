@@ -18,7 +18,7 @@
 
     <properties>
         <lifeos-base.version>0.2.0</lifeos-base.version>
-        <lifeos-contracts.version>0.10.0-SNAPSHOT</lifeos-contracts.version>
+        <lifeos-contracts.version>0.10.0</lifeos-contracts.version>
         <json-schema-validator.version>3.0.9</json-schema-validator.version>
     </properties>
 
