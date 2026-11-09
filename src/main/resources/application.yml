@@ -11,8 +11,33 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
+  mvc:
+    async:
+      # A streamed answer may take a while; the gateway's idle limit and the pings bound it in practice.
+      request-timeout: 5m
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      # A new consumer group (first deployment) starts from the oldest event, so the context is complete.
+      auto-offset-reset: earliest
+  ai:
+    model:
+      # Coach uses only chat; the other OpenAI models stay off (and need no key).
+      chat: ${COACH_CHAT_MODEL:openai}
+      embedding: none
+      image: none
+      audio:
+        speech: none
+        transcription: none
+      moderation: none
+    openai:
+      # Required at runtime: the user's goals, decisions and feedback go to OpenAI in prompts (KVKK: disclosed
+      # in the privacy notice, with the user's consent).
+      api-key: ${OPENAI_API_KEY:}
+      chat:
+        options:
+          model: ${OPENAI_MODEL:gpt-4o-mini}
+          temperature: 0.4
   security:
     oauth2:
       resourceserver:
@@ -37,3 +62,10 @@ lifeos:
       topic: lifeos.coach.events.v1
     inbox:
       consumer: coach
+  coach:
+    strategy-topic: lifeos.strategy.events.v1
+    trigger-topic: lifeos.trigger.events.v1
+    chat:
+      ping-interval: 15s            # keeps a streamed answer alive (the gateway cuts streams silent for 60 s)
+    recommendation:
+      cool-down: 7d                 # at most one proposal per goal in this time
